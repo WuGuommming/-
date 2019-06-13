@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     int a;
-    while(printf("cin 1 to continue\n"),cin >> a,a == 1)
+    while(true) // TODO: pend awake
     {
         Thread mainthread;
         mainthread.Run();

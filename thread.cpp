@@ -107,16 +107,3 @@ void Thread::Run()
         if(overtime);
     }
 }
-/*
-    int Ser;
-    string Key;
-    
-    bool WaitChoice();
-    bool WaitKey();
-    bool IsLegal();
-    int Find(string tar);
-    int Open(int tar);
-    bool Close(int tar);
-    void sendmsg(int type,int boxnum);
-    void Run();
-*/
