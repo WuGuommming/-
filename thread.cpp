@@ -1,31 +1,38 @@
 #include "thread.h"
-#include "choice.h"
-#include "key/key.h"
+#include "inc/choice.h"
+#include "inc/key/key.h"
 #include "file/file.h"
 #include "file/record.h"
 #include "file/box.h"
 
+
 using namespace std;
 
-bool Thread::WaitChoice()
+bool Thread::WaitChoice(QDialog view,int type) // type 1 for cun&qu; type 2 for leng&re
 {
     Choice choice;
-    choice.Get();
+    choice.Get(view);
     if(choice.Success == true)
     {
-        Ser = choice.Ser;
+        if(type == 1)
+            Ser = choice.Ser;
+        else
+            isHot = choice.Ser;
         return true;
     }
     return false;
 }
 
-bool Thread::WaitKey()
+bool Thread::WaitKey(QDialog keydialog)
 {
-    Key key;
-    if(key.GetKey == true)
+    for(int i=0; i<1e6; ++i)
     {
-        NowKey = key.GottenKey;
-        return true;
+        //TODO: get view input
+        if(keydialog.*** == true)
+        {
+            NowKey = ***
+            return true;
+        }
     }
     return false;
 }
@@ -64,19 +71,30 @@ void Thread::sendmsg(int type,int boxnum)
 
 void Thread::Run()
 {
-    while(WaitChoice() == false);
-    
-    while(WaitKey() == false);
+    QWidget view();
+    // TODO: new a view object
+    QDialog choice1();
+    while(WaitChoice(choice1,1) == false);
+    if(Ser == 1)
+    {
+        QDialog choice2();
+        while(WaitChoice(choice2,2) == false);
+    }
 
+    QDiolog keydialog();
+    while(WaitKey(keydialog) == false);
+
+    /*
     if(IsLegal() == false)
     {
         cout << "illegal key" << endl;
         return;
     }
+    */
     
-    nowfile.Path = "E://c++//normal//wmbtestfile.txt";
+    nowfile.Path = "E://wmbtestfile.txt";
 
-    if(Ser == 0) //cun
+    if(Ser == 1) //cun
     {
         Record ans = Find();
         if(ans.BoxNum != -1)
@@ -93,7 +111,7 @@ void Thread::Run()
         if(overtime)
             sendmsg(-1,BoxNum);
     }
-    else  //Qu
+    else  //qu
     {
         Record ans = Find();
         if(ans.BoxNum == -1)
